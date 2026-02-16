@@ -106,11 +106,11 @@ body {
   font-size: 5rem;
   font-weight: 900;
   line-height: 0.85;
-  color: transparent;
-  -webkit-text-stroke: 2px rgba(229, 9, 20, 0.5);
+  color: rgba(229, 9, 20, 0.5);
+  -webkit-text-stroke: 2px rgba(138, 0, 7, 0.962);
   font-family: 'Arial Black', 'Impact', sans-serif;
   letter-spacing: -0.06em;
-  margin-right: -0.25rem;
+  margin-right: -0.1rem;
 }
 
 /* ─── Badge component ─── */

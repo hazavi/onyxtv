@@ -25,8 +25,8 @@ export default function MediaCard({
       >
         <span className="rank-number select-none">{rank}</span>
         <div
-          className="relative rounded-xl overflow-hidden border border-white/[0.06] shadow-lg shadow-black/40 w-[140px] sm:w-[165px] md:w-[185px] aspect-[2/3]"
-        >
+          className="relative rounded-xl overflow-hidden shadow-lg shadow-black/40 w-[140px] sm:w-[165px] md:w-[185px] aspect-[2/3]"
+        > 
           <Image
             src={img(item.poster_path, "w342")}
             alt={title}
