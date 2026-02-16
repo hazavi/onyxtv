@@ -1,6 +1,22 @@
-# OnyxTV
+<div align="center">
+  <img src="app/favicon.ico" alt="OnyxTV" width="64" height="64" />
+  <h1>OnyxTV</h1>
+  <p>A modern streaming app for discovering and watching movies and TV series.<br/>Clean dark interface. Instant search. Progress tracking. No sign-up required.</p>
 
-A streaming app for movies and TV shows. Built with Next.js 16, powered by TMDB, and designed to feel like a real streaming app.
+  ![Next.js](https://img.shields.io/badge/Next.js-16-000?logo=nextdotjs&logoColor=white)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+  ![TMDB](https://img.shields.io/badge/TMDB-API-01B4E4?logo=themoviedatabase&logoColor=white)
+  ![License](https://img.shields.io/badge/License-MIT-green)
+</div>
+
+---
+
+## Preview
+
+<div align="center">
+  <img src="assets/onyxtv_preview.gif" alt="OnyxTV Preview" width="100%" />
+</div>
 
 ## Disclaimer
 
@@ -48,6 +64,13 @@ npm run dev
 - Tailwind CSS 4
 - TypeScript
 - TMDB API
+
+
+## Next Todo
+
+- Artist/actor profile pages with full filmography
+- Director profile pages with their complete catalog
+- Production company pages with all associated titles
 
 ## License
 MIT

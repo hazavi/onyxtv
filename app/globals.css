@@ -110,7 +110,7 @@ body {
   -webkit-text-stroke: 2px rgba(138, 0, 7, 0.962);
   font-family: 'Arial Black', 'Impact', sans-serif;
   letter-spacing: -0.06em;
-  margin-right: -0.1rem;
+  margin-right: -0.1rem;  
 }
 
 /* ─── Badge component ─── */
