@@ -1,6 +1,6 @@
 # OnyxTV
 
-A streaming dashboard for movies and TV shows. Built with Next.js 16, powered by TMDB, and designed to feel like a real streaming app.
+A streaming app for movies and TV shows. Built with Next.js 16, powered by TMDB, and designed to feel like a real streaming app.
 
 ## Disclaimer
 
