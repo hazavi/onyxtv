@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
-import { updateMovieProgress, updateTVProgress } from "@/lib/watchHistory";
+import { updateMovieProgress, updateTVProgress } from "@/helpers/watchHistory";
 
 interface PlayerMediaInfo {
   tmdbId: number;

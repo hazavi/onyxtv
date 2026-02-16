@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Star01, Calendar, Clock } from "@untitledui/icons";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { usePlayerProgress } from "@/hooks/usePlayerProgress";
-import { type MovieDetail, getMovieStreamUrl, backdrop } from "@/lib/tmdb";
+import { type MovieDetail, getMovieStreamUrl, backdrop } from "@/helpers/tmdb";
 
 export default function MovieWatchClient({ movie }: { movie: MovieDetail }) {
   const streamUrl = getMovieStreamUrl(movie.id);

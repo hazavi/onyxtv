@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSeasonDetail } from "@/lib/tmdb";
+import { getSeasonDetail } from "@/helpers/tmdb";
 
 const cache = new Map<string, { data: unknown; ts: number }>();
 const CACHE_TTL = 1000 * 60 * 60; // 1 hour

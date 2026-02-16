@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OnyxTV
 
-## Getting Started
+A streaming dashboard for movies and TV shows. Built with Next.js 16, powered by TMDB, and designed to feel like a real streaming app.
 
-First, run the development server:
+## Disclaimer
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This site does not store any media files on its server. All video content is provided by third-party services and is not hosted, uploaded, or managed by OnyxTV. I am not responsible for the content, availability, or legality of any external streams. Use at your own discretion.
+
+## Features
+
+- Browse trending, popular, and top-rated movies and TV shows
+- Full search with instant results
+- Detailed movie and TV pages with cast, seasons, and recommendations
+- Built-in video player with episode navigation
+- Continue watching -- tracks progress in localStorage
+- Optional site-wide password lock
+- Fully responsive dark UI
+
+## Project Structure
+
+```
+app/          -- Pages and API routes
+components/   -- Reusable UI components
+helpers/      -- TMDB API client, utilities, watch history logic
+hooks/        -- Custom React hooks (player progress, swipe)
+types/        -- TypeScript interfaces (TMDB, watch history)
+proxy.ts      -- Auth proxy (middleware replacement in Next.js 16)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repo
+2. Copy `.env.example` to `.env` and fill in your values:
+   - `TMDB_TOKEN` -- your TMDB API read access token
+   - `NEXT_PUBLIC_STREAM_BASE_URL` -- base URL for the streaming embed
+   - `SITE_PASSWORD` (optional) -- set to enable the password lock screen
+3. Install dependencies and run:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js 16 (App Router, Turbopack)
+- React 19
+- Tailwind CSS 4
+- TypeScript
+- TMDB API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+MIT

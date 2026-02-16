@@ -4,7 +4,7 @@ import {
   getTopRated,
   getNowPlaying,
   getAiringToday,
-} from "@/lib/tmdb";
+} from "@/helpers/tmdb";
 import HeroBanner from "@/components/HeroBanner";
 import MediaRow from "@/components/MediaRow";
 import ContinueWatchingRow from "@/components/ContinueWatchingRow";

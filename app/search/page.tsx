@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { searchMulti, getPopular, mediaType } from "@/lib/tmdb";
+import { searchMulti, getPopular, mediaType } from "@/helpers/tmdb";
 import MediaCard from "@/components/MediaCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 

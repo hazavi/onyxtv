@@ -2,8 +2,8 @@
 
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { TMDBMedia } from "@/lib/tmdb";
+import { cn } from "@/helpers/utils";
+import { TMDBMedia } from "@/helpers/tmdb";
 import MediaCard from "./MediaCard";
 
 interface Props {

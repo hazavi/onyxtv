@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getPopular, getTopRated, getOnTheAir, mediaType } from "@/lib/tmdb";
+import { getPopular, getTopRated, getOnTheAir, mediaType } from "@/helpers/tmdb";
 import MediaCard from "@/components/MediaCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Tv03, Star01, Monitor05, ChevronLeft, ChevronRight } from "@untitledui/icons";

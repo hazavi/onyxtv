@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Play, Info, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/helpers/utils";
 import { useSwipe } from "@/hooks/useSwipe";
 import {
   TMDBMedia,
@@ -12,7 +12,7 @@ import {
   mediaTitle,
   mediaType,
   mediaYear,
-} from "@/lib/tmdb";
+} from "@/helpers/tmdb";
 
 export default function HeroBanner({ items }: { items: TMDBMedia[] }) {
   const [current, setCurrent] = useState(0);

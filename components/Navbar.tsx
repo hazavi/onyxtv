@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/helpers/utils";
 import {
   Home03,
   Film02,
@@ -15,7 +15,7 @@ import {
   Loading02,
   ChevronUp,
 } from "@untitledui/icons";
-import { img, mediaTitle, mediaType, mediaYear, type TMDBMedia } from "@/lib/tmdb";
+import { img, mediaTitle, mediaType, mediaYear, type TMDBMedia } from "@/helpers/tmdb";
 import { ChevronDown } from "lucide-react";
 
 const NAV_ITEMS = [

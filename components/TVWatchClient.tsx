@@ -13,13 +13,13 @@ import {
   Loading02,
 } from "@untitledui/icons";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { cn } from "@/lib/utils";
+import { cn } from "@/helpers/utils";
 import {
   getTVStreamUrl,
   backdrop,
   type TVDetail,
   type SeasonDetail,
-} from "@/lib/tmdb";
+} from "@/helpers/tmdb";
 import { usePlayerProgress } from "@/hooks/usePlayerProgress";
 
 const EPISODES_PER_PAGE = 50;

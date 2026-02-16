@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PlayCircle, Star01, Calendar, LayersThree01 } from "@untitledui/icons";
-import { getTVDetail, img, backdrop } from "@/lib/tmdb";
+import { getTVDetail, img, backdrop } from "@/helpers/tmdb";
 import MediaRow from "@/components/MediaRow";
 import SeasonRow from "@/components/SeasonRow";
 import Breadcrumbs from "@/components/Breadcrumbs";

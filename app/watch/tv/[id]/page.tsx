@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTVDetail } from "@/lib/tmdb";
+import { getTVDetail } from "@/helpers/tmdb";
 import TVWatchClient from "@/components/TVWatchClient";
 import { Suspense } from "react";
 

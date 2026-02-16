@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star, Play, Calendar } from "lucide-react";
-import { TMDBMedia, img, mediaTitle, mediaType, mediaYear } from "@/lib/tmdb";
+import { TMDBMedia, img, mediaTitle, mediaType, mediaYear } from "@/helpers/tmdb";
 
 export default function MediaCard({
   item,

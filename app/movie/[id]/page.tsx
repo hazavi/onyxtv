@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PlayCircle, Star01, Clock, Calendar } from "@untitledui/icons";
-import { getMovieDetail, img, backdrop } from "@/lib/tmdb";
+import { getMovieDetail, img, backdrop } from "@/helpers/tmdb";
 import MediaRow from "@/components/MediaRow";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { notFound } from "next/navigation";

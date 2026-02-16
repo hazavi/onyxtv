@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getMovieDetail } from "@/lib/tmdb";
+import { getMovieDetail } from "@/helpers/tmdb";
 import MovieWatchClient from "@/components/MovieWatchClient";
 
 export async function generateMetadata({

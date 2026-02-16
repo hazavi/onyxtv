@@ -4,8 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Play, ChevronLeft, ChevronRight, Clock, X, Star } from "lucide-react";
-import { getContinueWatching, removeFromHistory, type WatchHistoryEntry } from "@/lib/watchHistory";
-import { img } from "@/lib/tmdb";
+import { getContinueWatching, removeFromHistory, type WatchHistoryEntry } from "@/helpers/watchHistory";
+import { img } from "@/helpers/tmdb";
 
 function formatTimestamp(seconds: number) {
   const h = Math.floor(seconds / 3600);
