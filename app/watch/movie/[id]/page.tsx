@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getMovieDetail } from "@/helpers/tmdb";
+import { getMovieDetail, getMovieStreamProxyUrl } from "@/helpers/tmdb";
 import MovieWatchClient from "@/components/MovieWatchClient";
 
 export async function generateMetadata({
@@ -23,10 +23,11 @@ export default async function WatchMoviePage({
 }) {
   const { id } = await params;
   const movie = await getMovieDetail(Number(id));
+  const streamUrl = getMovieStreamProxyUrl(movie.id);
 
   return (
     <div className="min-h-screen">
-      <MovieWatchClient movie={movie} />
+      <MovieWatchClient movie={movie} streamUrl={streamUrl} />
     </div>
   );
 }

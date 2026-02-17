@@ -18,8 +18,6 @@ export type {
 /* ─────────── Config ─────────── */
 
 const TMDB_TOKEN = process.env.TMDB_TOKEN!;
-const STREAM_BASE = process.env.NEXT_PUBLIC_STREAM_BASE_URL;
-
 const BASE = "https://api.themoviedb.org/3";
 
 const headers: HeadersInit = {
@@ -105,18 +103,21 @@ export const img = (path: string | null, size = "w500") =>
 
 export const backdrop = (path: string | null) => img(path, "original");
 
-/* ─────────── Stream URL helpers ─────────── */
+/* ─────────── Stream URL helpers (server-only) ─────────── */
 
-export function getMovieStreamUrl(tmdbId: number) {
-  return `${STREAM_BASE}/movie/${tmdbId}?autoPlay=true&title=false&hideServer=true&chromecast=false&theme=FF0000`;
+import { signStreamToken } from "@/helpers/crypto";
+
+/**
+ * Build a proxied stream URL that goes through /api/stream.
+ * The real streaming base URL never reaches the client.
+ */
+export function getMovieStreamProxyUrl(tmdbId: number) {
+  const token = signStreamToken("movie", tmdbId);
+  return `/api/stream?type=movie&id=${tmdbId}&token=${token}`;
 }
 
-export function getTVStreamUrl(
-  tmdbId: number,
-  season: number,
-  episode: number
-) {
-  return `${STREAM_BASE}/tv/${tmdbId}/${season}/${episode}?autoPlay=true&nextButton=false&autoNext=false&title=false&hideServer=true&chromecast=false&theme=FF0000`;
+export function getTVStreamToken(tmdbId: number) {
+  return signStreamToken("tv", tmdbId);
 }
 
 /* ─────────── Utility ─────────── */

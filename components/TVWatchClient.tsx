@@ -15,7 +15,6 @@ import {
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { cn } from "@/helpers/utils";
 import {
-  getTVStreamUrl,
   backdrop,
   type TVDetail,
   type SeasonDetail,
@@ -24,7 +23,13 @@ import { usePlayerProgress } from "@/hooks/usePlayerProgress";
 
 const EPISODES_PER_PAGE = 50;
 
-export default function TVWatchClient({ tv }: { tv: TVDetail }) {
+export default function TVWatchClient({
+  tv,
+  streamToken,
+}: {
+  tv: TVDetail;
+  streamToken: string;
+}) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -39,7 +44,7 @@ export default function TVWatchClient({ tv }: { tv: TVDetail }) {
   const [sortAsc, setSortAsc] = useState(true);
   const [page, setPage] = useState(0);
 
-  const streamUrl = getTVStreamUrl(tv.id, season, episode);
+  const streamUrl = `/api/stream?type=tv&id=${tv.id}&s=${season}&e=${episode}&token=${streamToken}`;
 
   usePlayerProgress({
     tmdbId: tv.id,
@@ -154,9 +159,8 @@ export default function TVWatchClient({ tv }: { tv: TVDetail }) {
                   key={streamUrl}
                   src={streamUrl}
                   className="absolute inset-0 w-full h-full"
-                  allowFullScreen
                   allow="autoplay; fullscreen; picture-in-picture"
-                  referrerPolicy="origin"
+                  referrerPolicy="no-referrer"
                   style={{ border: "none" }}
                 />
               </div>

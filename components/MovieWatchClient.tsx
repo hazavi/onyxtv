@@ -5,11 +5,15 @@ import Image from "next/image";
 import { Star01, Calendar, Clock } from "@untitledui/icons";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { usePlayerProgress } from "@/hooks/usePlayerProgress";
-import { type MovieDetail, getMovieStreamUrl, backdrop } from "@/helpers/tmdb";
+import { type MovieDetail, backdrop } from "@/helpers/tmdb";
 
-export default function MovieWatchClient({ movie }: { movie: MovieDetail }) {
-  const streamUrl = getMovieStreamUrl(movie.id);
-
+export default function MovieWatchClient({
+  movie,
+  streamUrl,
+}: {
+  movie: MovieDetail;
+  streamUrl: string;
+}) {
   usePlayerProgress({
     tmdbId: movie.id,
     type: "movie",
@@ -51,9 +55,8 @@ export default function MovieWatchClient({ movie }: { movie: MovieDetail }) {
             <iframe
               src={streamUrl}
               className="absolute inset-0 w-full h-full"
-              allowFullScreen
               allow="autoplay; fullscreen; picture-in-picture"
-              referrerPolicy="origin"
+              referrerPolicy="no-referrer"
               style={{ border: "none" }}
             />
           </div>

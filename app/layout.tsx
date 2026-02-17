@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import DevToolsGuard from "@/components/DevToolsGuard";
 import { Suspense } from "react";
 
 const geistSans = Geist({
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <DevToolsGuard />
         <main className="min-h-screen">{children}</main>
         <footer className="text-center text-white/20 text-xs py-6 px-4 border-t border-white/[0.04]">
           This site does not store any files on our server, we only linked to the media which is hosted on 3rd party services.

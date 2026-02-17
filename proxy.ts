@@ -12,24 +12,36 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/favicon")
   ) {
-    return NextResponse.next();
+    return addSecurityHeaders(NextResponse.next());
   }
 
   const sitePassword = process.env.SITE_PASSWORD;
 
   // If no password is set, skip sitelock entirely
-  if (!sitePassword) return NextResponse.next();
+  if (!sitePassword) return addSecurityHeaders(NextResponse.next());
 
   // Check auth cookie
   const authCookie = request.cookies.get(COOKIE_NAME);
   if (authCookie?.value === sitePassword) {
-    return NextResponse.next();
+    return addSecurityHeaders(NextResponse.next());
   }
 
   // Redirect to lock page
   const url = request.nextUrl.clone();
   url.pathname = "/lock";
   return NextResponse.redirect(url);
+}
+
+/**
+ * Attach security headers to every response to harden against scraping
+ * and information leakage.
+ */
+function addSecurityHeaders(response: NextResponse) {
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return response;
 }
 
 export const config = {

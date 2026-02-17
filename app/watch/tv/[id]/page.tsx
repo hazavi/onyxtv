@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTVDetail } from "@/helpers/tmdb";
+import { getTVDetail, getTVStreamToken } from "@/helpers/tmdb";
 import TVWatchClient from "@/components/TVWatchClient";
 import { Suspense } from "react";
 
@@ -24,6 +24,7 @@ export default async function WatchTVPage({
 }) {
   const { id } = await params;
   const tv = await getTVDetail(Number(id));
+  const streamToken = getTVStreamToken(tv.id);
 
   return (
     <Suspense
@@ -33,7 +34,7 @@ export default async function WatchTVPage({
         </div>
       }
     >
-      <TVWatchClient tv={tv} />
+      <TVWatchClient tv={tv} streamToken={streamToken} />
     </Suspense>
   );
 }

@@ -4,8 +4,6 @@
   <p>A modern streaming app for discovering and watching movies and TV series.<br/>Clean dark interface. Instant search. Progress tracking. No sign-up required.</p>
 
   ![Next.js](https://img.shields.io/badge/Next.js-16-000?logo=nextdotjs&logoColor=white)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
-  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
   ![TMDB](https://img.shields.io/badge/TMDB-API-01B4E4?logo=themoviedatabase&logoColor=white)
   ![License](https://img.shields.io/badge/License-MIT-green)
 </div>
@@ -48,7 +46,7 @@ proxy.ts      -- Auth proxy (middleware replacement in Next.js 16)
 1. Clone the repo
 2. Copy `.env.example` to `.env` and fill in your values:
    - `TMDB_TOKEN` -- your TMDB API read access token
-   - `NEXT_PUBLIC_STREAM_BASE_URL` -- base URL for the streaming embed
+   - `STREAM_BASE_URL` -- base URL for the streaming embed 
    - `SITE_PASSWORD` (optional) -- set to enable the password lock screen
 3. Install dependencies and run:
 

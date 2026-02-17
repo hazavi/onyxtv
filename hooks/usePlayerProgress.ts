@@ -15,17 +15,20 @@ interface PlayerMediaInfo {
 }
 
 /**
- * Hook to listen to vidup.to player postMessage events and persist progress.
- * Throttles timeupdate to once every 5 seconds to avoid excessive writes.
+ * Hook to listen to the embedded player's postMessage events and persist
+ * progress.  Throttles timeupdate to once every 5 seconds.
+ *
+ * Origin check validates message shape rather than a hard-coded domain
+ * so the streaming base URL never needs to be on the client.
  */
 export function usePlayerProgress(media: PlayerMediaInfo) {
   const handler = useCallback(
     (() => {
       let lastSave = 0;
-      const streamOrigin = process.env.NEXT_PUBLIC_STREAM_BASE_URL ?? "";
-      return ({ origin, data }: MessageEvent) => {
-        if (origin !== streamOrigin || !data) return;
-        if (data.type !== "PLAYER_EVENT") return;
+      return ({ data }: MessageEvent) => {
+        // Validate message shape instead of origin (URL is server-only)
+        if (!data || typeof data !== "object") return;
+        if (data.type !== "PLAYER_EVENT" || !data.data) return;
 
         const { event, currentTime, duration } = data.data;
 
