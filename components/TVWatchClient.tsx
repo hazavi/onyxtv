@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -32,6 +32,18 @@ export default function TVWatchClient({
 }) {
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  const videoRef = useRef<HTMLDivElement>(null);
+  const [videoHeight, setVideoHeight] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setVideoHeight(el.offsetHeight));
+    ro.observe(el);
+    setVideoHeight(el.offsetHeight);
+    return () => ro.disconnect();
+  }, []);
 
   const initialSeason = Number(searchParams.get("s")) || 1;
   const initialEpisode = Number(searchParams.get("e")) || 1;
@@ -150,7 +162,7 @@ export default function TVWatchClient({
         <div className="flex flex-col lg:flex-row gap-0 lg:gap-0">
           {/* Left: Video player */}
           <div className="flex-1 min-w-0">
-            <div className="w-full bg-black rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
+            <div ref={videoRef} className="w-full bg-black rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
               <div
                 className="relative w-full"
                 style={{ paddingTop: "56.25%" }}
@@ -168,7 +180,10 @@ export default function TVWatchClient({
           </div>
 
           {/* Right: Episodes panel */}
-          <div className="w-full lg:w-[340px] shrink-0 glass lg:rounded-r-xl rounded-b-xl lg:rounded-bl-none flex flex-col lg:max-h-[560px]">
+          <div
+            className="w-full lg:w-[340px] shrink-0 glass lg:rounded-r-xl rounded-b-xl lg:rounded-bl-none flex flex-col max-h-[400px]"
+            style={videoHeight != null ? { maxHeight: `${videoHeight}px`, overflow: "hidden" } : undefined}
+          >
             {/* Panel header */}
             <div className="p-4 border-b border-white/[0.07]">
               <div className="flex items-center justify-between mb-3">
@@ -193,7 +208,7 @@ export default function TVWatchClient({
                     onClick={() => setSortAsc((v) => !v)}
                     className={cn(
                       "flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium transition",
-                      "bg-white/[0.06] border border-white/[0.1] text-white/50 hover:text-white/80"
+                      "bg-white/[0.06] border border-white/[0.1] text-white/50 hover:cursor-pointer hover:text-white/80"
                     )}
                     title={sortAsc ? "Ascending" : "Descending"}
                   >
@@ -209,7 +224,7 @@ export default function TVWatchClient({
                     key={s.season_number}
                     onClick={() => selectSeason(s.season_number)}
                     className={cn(
-                      "px-2.5 py-1 rounded-md text-xs font-medium transition",
+                      "px-2.5 py-1 rounded-md text-xs font-medium transition hover:cursor-pointer",
                       season === s.season_number
                         ? "bg-accent text-white"
                         : "bg-white/[0.06] text-white/40 hover:text-white/70"
@@ -241,7 +256,7 @@ export default function TVWatchClient({
                         key={ep.episode_number}
                         onClick={() => selectEpisode(ep.episode_number)}
                         className={cn(
-                          "flex items-center gap-3 w-full px-4 py-2.5 text-left transition hover:bg-white/[0.04]",
+                          "flex items-center gap-3 w-full px-4 py-2.5 text-left transition hover:cursor-pointer hover:bg-white/[0.04]",
                           isActive && "bg-accent/10"
                         )}
                       >
