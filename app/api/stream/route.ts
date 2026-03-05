@@ -44,12 +44,15 @@ export async function GET(request: NextRequest) {
   /* ── Build real stream URL ── */
   let streamUrl: string;
 
+  const hideServer = searchParams.get("hideServer") === "true";
+  const chromecast = searchParams.get("chromecast") === "true";
+
   if (type === "movie") {
-    streamUrl = `${STREAM_BASE}/movie/${tmdbId}?autoPlay=true&title=false&hideServer=false&sub=en&chromecast=false&theme=FF0000`;
+    streamUrl = `${STREAM_BASE}/movie/${tmdbId}?autoPlay=true&title=false&hideServer=${hideServer}&sub=en&chromecast=${chromecast}&theme=FF0000`;
   } else if (type === "tv") {
     const season = searchParams.get("s") || "1";
     const episode = searchParams.get("e") || "1";
-    streamUrl = `${STREAM_BASE}/tv/${tmdbId}/${season}/${episode}?autoPlay=true&nextButton=false&autoNext=false&title=false&hideServer=false&sub=en&chromecast=false&theme=FF0000`;
+    streamUrl = `${STREAM_BASE}/tv/${tmdbId}/${season}/${episode}?autoPlay=true&nextButton=true&autoNext=false&title=false&hideServer=${hideServer}&sub=en&chromecast=${chromecast}&theme=FF0000`;
   } else {
     return new NextResponse("Bad Request", { status: 400 });
   }
@@ -77,6 +80,7 @@ export async function GET(request: NextRequest) {
   f.setAttribute("allow","autoplay; fullscreen; picture-in-picture");
   f.setAttribute("referrerpolicy","no-referrer");
   document.body.appendChild(f);
+  window.addEventListener("message",function(e){if(e.source!==window){window.parent.postMessage(e.data,"*");}});
 })();
 </script>
 </body></html>`;
