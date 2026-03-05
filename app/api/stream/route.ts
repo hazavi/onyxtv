@@ -45,11 +45,11 @@ export async function GET(request: NextRequest) {
   let streamUrl: string;
 
   if (type === "movie") {
-    streamUrl = `${STREAM_BASE}/movie/${tmdbId}?autoPlay=true&title=false&hideServer=true&chromecast=false&theme=FF0000`;
+    streamUrl = `${STREAM_BASE}/movie/${tmdbId}?autoPlay=true&title=false&hideServer=false&chromecast=false&theme=FF0000`;
   } else if (type === "tv") {
     const season = searchParams.get("s") || "1";
     const episode = searchParams.get("e") || "1";
-    streamUrl = `${STREAM_BASE}/tv/${tmdbId}/${season}/${episode}?autoPlay=true&nextButton=false&autoNext=false&title=false&hideServer=true&chromecast=false&theme=FF0000`;
+    streamUrl = `${STREAM_BASE}/tv/${tmdbId}/${season}/${episode}?autoPlay=true&nextButton=false&autoNext=false&title=false&hideServer=false&chromecast=false&theme=FF0000`;
   } else {
     return new NextResponse("Bad Request", { status: 400 });
   }

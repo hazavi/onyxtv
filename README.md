@@ -69,6 +69,7 @@ npm run dev
 - Artist/actor profile pages with full filmography
 - Director profile pages with their complete catalog
 - Production company pages with all associated titles
+- Desktop App (Electron)
 
 ## License
 MIT
