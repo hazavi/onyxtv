@@ -23,7 +23,6 @@ import {
   type SeasonDetail,
 } from "@/helpers/tmdb";
 import { usePlayerProgress } from "@/hooks/usePlayerProgress";
-import { title } from "process";
 
 const EPISODES_PER_PAGE = 50;
 
@@ -81,6 +80,11 @@ export default function TVWatchClient({
 
   const streamUrl = `/api/stream?type=tv&id=${tv.id}&s=${season}&e=${episode}&token=${streamToken}&hideServer=${hideServer}&chromecast=${chromecast}`;
 
+  const currentEpRuntime = useMemo(() => {
+    const ep = episodes.find((e) => e.episode_number === episode);
+    return ep?.runtime || 30;
+  }, [episodes, episode]);
+
   usePlayerProgress({
     tmdbId: tv.id,
     type: "tv",
@@ -90,6 +94,7 @@ export default function TVWatchClient({
     backdrop_path: tv.backdrop_path,
     season,
     episode,
+    runtimeMinutes: currentEpRuntime,
   });
 
   useEffect(() => {

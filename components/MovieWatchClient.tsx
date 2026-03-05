@@ -43,6 +43,7 @@ export default function MovieWatchClient({
     overview: movie.overview,
     poster_path: movie.poster_path,
     backdrop_path: movie.backdrop_path,
+    runtimeMinutes: movie.runtime,
   });
 
   const CtrlBtn = ({
