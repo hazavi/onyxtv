@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { PlayCircle, Star01, Calendar, LayersThree01 } from "@untitledui/icons";
 import { getTVDetail, img, backdrop } from "@/helpers/tmdb";
 import MediaRow from "@/components/MediaRow";
+import CastRow from "@/components/CastRow";
+import TrailerRow from "@/components/TrailerRow";
 import SeasonRow from "@/components/SeasonRow";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { notFound } from "next/navigation";
@@ -35,6 +37,19 @@ export default async function TVPage({
     notFound();
   }
 
+  const creators = tv.created_by?.slice(0, 3) ?? [];
+  const writers = tv.credits?.crew
+    ?.filter((c) => c.job === "Writer" || c.job === "Screenplay" || c.job === "Story")
+    .reduce((acc, c) => {
+      if (!acc.find((x) => x.id === c.id)) acc.push(c);
+      return acc;
+    }, [] as typeof tv.credits.crew)
+    .slice(0, 3);
+
+  const trailers = tv.videos?.results
+    ?.filter((v) => v.site === "YouTube" && (v.type === "Trailer" || v.type === "Teaser"))
+    .slice(0, 4);
+
   return (
     <>
       <div className="relative w-full h-[70vh] min-h-[400px]">
@@ -59,12 +74,12 @@ export default async function TVPage({
         <div className="flex flex-col md:flex-row gap-8">
           {/* Poster */}
           <div className="shrink-0">
-            <div className="glass rounded-2xl overflow-hidden shadow-2xl shadow-black/40 w-[220px]">
+            <div className="glass rounded-2xl overflow-hidden shadow-2xl shadow-black/40 w-[240px]">
               <Image
                 src={img(tv.poster_path, "w500")}
                 alt={tv.name}
-                width={220}
-                height={330}
+                width={240}
+                height={350}
                 className="object-cover"
               />
             </div>
@@ -93,7 +108,6 @@ export default async function TVPage({
                 {tv.first_air_date?.slice(0, 4)}
               </span>
               <span className="badge badge-gray">
-                <LayersThree01 className="w-3 h-3" />
                 {tv.number_of_seasons} Season{tv.number_of_seasons !== 1 ? "s" : ""}
               </span>
               <span className="badge badge-gray">
@@ -105,11 +119,11 @@ export default async function TVPage({
             </div>
 
             {/* Genres */}
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-1.5 mb-6">
               {tv.genres?.map((g) => (
                 <span
                   key={g.id}
-                  className="text-xs px-3 py-1.5 rounded-xl glass text-white/50"
+                  className="badge badge-gray"
                 >
                   {g.name}
                 </span>
@@ -119,6 +133,22 @@ export default async function TVPage({
             <p className="text-white/40 leading-relaxed mb-6 text-sm max-w-2xl">
               {tv.overview}
             </p>
+
+            {/* Creators & Writers */}
+            <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6">
+              {creators.length > 0 && (
+                <p className="text-sm text-white/30">
+                  <span className="text-white/60 font-medium">Created by</span>{" "}
+                  {creators.map((c) => c.name).join(", ")}
+                </p>
+              )}
+              {writers && writers.length > 0 && (
+                <p className="text-sm text-white/30">
+                  <span className="text-white/60 font-medium">Writers</span>{" "}
+                  {writers.map((w) => w.name).join(", ")}
+                </p>
+              )}
+            </div>
 
             <Link
               href={`/watch/tv/${tv.id}?s=1&e=1`}
@@ -135,32 +165,14 @@ export default async function TVPage({
           <SeasonRow tvId={tv.id} seasons={tv.seasons.filter((s) => s.season_number > 0)} />
         )}
 
+        {/* Trailers */}
+        {trailers && trailers.length > 0 && (
+          <TrailerRow trailers={trailers} />
+        )}
+
         {/* Cast */}
         {tv.credits?.cast?.length > 0 && (
-          <section className="mt-14">
-            <h2 className="text-lg font-semibold text-white mb-4 tracking-tight">Cast</h2>
-            <div className="carousel-row no-scrollbar">
-              {tv.credits.cast.slice(0, 15).map((c) => (
-                <div key={c.id} className="shrink-0 w-24 text-center group">
-                  <div className="w-16 h-16 mx-auto rounded-full overflow-hidden glass mb-2 group-hover:border-white/10 transition">
-                    <Image
-                      src={img(c.profile_path, "w185")}
-                      alt={c.name}
-                      width={64}
-                      height={64}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <p className="text-[11px] font-medium text-white/70 truncate">
-                    {c.name}
-                  </p>
-                  <p className="text-[10px] text-white/25 truncate">
-                    {c.character}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
+          <CastRow cast={tv.credits.cast.slice(0, 20)} />
         )}
 
         {/* Recommendations */}

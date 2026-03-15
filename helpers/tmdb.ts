@@ -13,6 +13,8 @@ export type {
   CrewMember,
   Season,
   Episode,
+  Video,
+  ProductionCompany,
 } from "@/types/tmdb";
 
 /* ─────────── Config ─────────── */
@@ -110,13 +112,13 @@ export function searchMulti(query: string, page = 1) {
 
 export function getMovieDetail(id: number) {
   return tmdbFetch<MovieDetail>(`/movie/${id}`, {
-    append_to_response: "credits,recommendations",
+    append_to_response: "credits,recommendations,videos",
   });
 }
 
 export function getTVDetail(id: number) {
   return tmdbFetch<TVDetail>(`/tv/${id}`, {
-    append_to_response: "credits,recommendations",
+    append_to_response: "credits,recommendations,videos",
   });
 }
 

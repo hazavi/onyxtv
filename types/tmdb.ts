@@ -42,6 +42,22 @@ export interface CrewMember {
   profile_path: string | null;
 }
 
+export interface Video {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+  official: boolean;
+}
+
+export interface ProductionCompany {
+  id: number;
+  name: string;
+  logo_path: string | null;
+  origin_country: string;
+}
+
 export interface Season {
   id: number;
   name: string;
@@ -77,7 +93,9 @@ export interface MovieDetail {
   genres: Genre[];
   status: string;
   tagline: string;
+  production_companies: ProductionCompany[];
   credits: { cast: CastMember[]; crew: CrewMember[] };
+  videos: { results: Video[] };
   recommendations: TMDBListResult;
 }
 
@@ -97,7 +115,10 @@ export interface TVDetail {
   number_of_seasons: number;
   number_of_episodes: number;
   seasons: Season[];
+  created_by: { id: number; name: string; profile_path: string | null }[];
+  production_companies: ProductionCompany[];
   credits: { cast: CastMember[]; crew: CrewMember[] };
+  videos: { results: Video[] };
   recommendations: TMDBListResult;
 }
 
