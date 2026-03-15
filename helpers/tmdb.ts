@@ -4,9 +4,10 @@ import type {
   MovieDetail,
   TVDetail,
   SeasonDetail,
+  PersonDetail,
 } from "@/types/tmdb";
 
-export type { TMDBMedia, TMDBListResult, MovieDetail, TVDetail, SeasonDetail };
+export type { TMDBMedia, TMDBListResult, MovieDetail, TVDetail, SeasonDetail, PersonDetail };
 export type {
   Genre,
   CastMember,
@@ -15,6 +16,7 @@ export type {
   Episode,
   Video,
   ProductionCompany,
+  PersonCredit,
 } from "@/types/tmdb";
 
 /* ─────────── Config ─────────── */
@@ -124,6 +126,12 @@ export function getTVDetail(id: number) {
 
 export function getSeasonDetail(tvId: number, seasonNumber: number) {
   return tmdbFetch<SeasonDetail>(`/tv/${tvId}/season/${seasonNumber}`);
+}
+
+export function getPersonDetail(id: number) {
+  return tmdbFetch<PersonDetail>(`/person/${id}`, {
+    append_to_response: "combined_credits",
+  });
 }
 
 /* ─────────── Image helpers ─────────── */

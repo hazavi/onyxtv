@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { img } from "@/helpers/tmdb";
 import type { CastMember } from "@/types/tmdb";
@@ -79,7 +80,8 @@ export default function CastRow({ cast }: Props) {
           className="carousel-row no-scrollbar touch-pan-x"
         >
           {cast.map((c) => (
-            <div
+            <Link
+              href={`/person/${c.id}`}
               key={c.id}
               className="shrink-0 w-[130px] sm:w-[150px] rounded-xl overflow-hidden bg-white/[0.04] border border-white/[0.06] hover:border-white/[0.14] hover:bg-white/[0.06] transition-all duration-200"
             >
@@ -96,7 +98,7 @@ export default function CastRow({ cast }: Props) {
                 <p className="text-xs font-semibold text-white/90 truncate">{c.name}</p>
                 <p className="text-[10px] text-white/35 truncate mt-0.5">{c.character}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

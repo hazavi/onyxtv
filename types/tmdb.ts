@@ -128,3 +128,34 @@ export interface SeasonDetail {
   season_number: number;
   episodes: Episode[];
 }
+
+export interface PersonCredit {
+  id: number;
+  title?: string;
+  name?: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  release_date?: string;
+  first_air_date?: string;
+  vote_average: number;
+  character?: string;
+  job?: string;
+  media_type: "movie" | "tv";
+  popularity: number;
+}
+
+export interface PersonDetail {
+  id: number;
+  name: string;
+  biography: string;
+  birthday: string | null;
+  deathday: string | null;
+  place_of_birth: string | null;
+  profile_path: string | null;
+  known_for_department: string;
+  also_known_as: string[];
+  combined_credits: {
+    cast: PersonCredit[];
+    crew: PersonCredit[];
+  };
+}

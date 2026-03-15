@@ -137,13 +137,18 @@ export default async function MoviePage({
               {director && (
                 <p className="text-sm text-white/30">
                   <span className="text-white/60 font-medium">Director</span>{" "}
-                  {director.name}
+                  <Link href={`/person/${director.id}`} className="hover:text-white/60 transition">{director.name}</Link>
                 </p>
               )}
               {writers && writers.length > 0 && (
                 <p className="text-sm text-white/30">
                   <span className="text-white/60 font-medium">Writers</span>{" "}
-                  {writers.map((w) => w.name).join(", ")}
+                  {writers.map((w, i) => (
+                    <span key={w.id}>
+                      {i > 0 && ", "}
+                      <Link href={`/person/${w.id}`} className="hover:text-white/60 transition">{w.name}</Link>
+                    </span>
+                  ))}
                 </p>
               )}
             </div>
