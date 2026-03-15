@@ -26,23 +26,21 @@ export default function DevToolsGuard() {
     // Don't run on the lock page — detection redirects create an infinite loop
     if (pathname === "/lock") return;
     /* ── Bail out during development ── */
-    // Remove or comment this block if you want protection in dev too
-    // if (process.env.NODE_ENV === "development") return;
+    if (process.env.NODE_ENV === "development") return;
 
     let detected = false;
 
     function onDetected() {
       if (detected) return;
       detected = true;
-      // Try to close; if the browser blocks it, navigate away
+      // Try to close; if the browser blocks it, blank the page
       try {
         window.close();
       } catch {
         /* noop */
       }
-      // Fallback: blank the page and redirect
+      // Blank the page content — no redirect to avoid an infinite loop
       document.documentElement.innerHTML = "";
-      window.location.replace("/");
     }
 
     /* ── 1. Debugger timing ── */
