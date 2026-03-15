@@ -135,6 +135,7 @@ export default function Navbar() {
             "w-6 h-4 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-xl border border-white/[0.08] text-white/25 hover:text-white/60 hover:bg-white/[0.1] transition-all duration-200 cursor-pointer",
             dockHidden && "mb-0"
           )}
+          style={{ WebkitBackdropFilter: "blur(24px)" }}
           aria-label={dockHidden ? "Show dock" : "Hide dock"}
         >
           <ChevronDown
@@ -154,7 +155,9 @@ export default function Navbar() {
               : "opacity-100 scale-100 translate-y-0"
           )}
         >
-        <div className="flex items-center gap-1 md:gap-1.5 px-2 md:px-3 py-1.5 md:py-2 rounded-2xl md:rounded-3xl bg-black/40 backdrop-blur-md border border-black/10 shadow-2xl shadow-black/40">
+        <div className="flex items-center gap-1 md:gap-1.5 px-2 md:px-3 py-1.5 md:py-2 rounded-2xl md:rounded-3xl bg-black/40 backdrop-blur-md border border-black/10 shadow-2xl shadow-black/40"
+          style={{ WebkitBackdropFilter: "blur(12px)" }}
+        >
           {allItems.map((item) => {
             const Icon = item.icon;
             const active =
@@ -205,11 +208,14 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[60] flex items-start justify-center pt-[10vh]">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            style={{ WebkitBackdropFilter: "blur(4px)" }}
             onClick={closeSearch}
           />
           <div className="relative w-full max-w-xl mx-4">
             <form onSubmit={handleSearch}>
-              <div className="flex items-center gap-3 bg-white/[0.08] backdrop-blur-2xl border border-white/[0.12] rounded-2xl px-5 py-4 shadow-2xl">
+              <div className="flex items-center gap-3 bg-white/[0.08] backdrop-blur-2xl border border-white/[0.12] rounded-2xl px-5 py-4 shadow-2xl"
+                style={{ WebkitBackdropFilter: "blur(40px)" }}
+              >
                 <SearchLg
                   className="w-5 h-5 text-white/40 shrink-0"
                   strokeWidth={1.8}
@@ -237,7 +243,9 @@ export default function Navbar() {
 
             {/* Suggestions dropdown */}
             {suggestions.length > 0 && (
-              <div className="mt-2 rounded-2xl bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1] shadow-2xl overflow-hidden">
+              <div className="mt-2 rounded-2xl bg-white/[0.06] backdrop-blur-2xl border border-white/[0.1] shadow-2xl overflow-hidden"
+                style={{ WebkitBackdropFilter: "blur(40px)" }}
+              >
                 {suggestions.map((item) => {
                   const type = mediaType(item);
                   return (
