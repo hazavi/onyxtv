@@ -73,6 +73,9 @@ export default function Navbar() {
     };
   }, []);
 
+  // Don't render navbar on the lock page
+  if (pathname === "/lock") return null;
+
   function handleQueryChange(val: string) {
     setQuery(val);
     fetchSuggestions(val);

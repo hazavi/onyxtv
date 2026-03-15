@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * Multi-layered DevTools detection + prevention.
@@ -19,7 +20,11 @@ import { useEffect } from "react";
  *  5. Context-menu blocking (right-click).
  */
 export default function DevToolsGuard() {
+  const pathname = usePathname();
+
   useEffect(() => {
+    // Don't run on the lock page — detection redirects create an infinite loop
+    if (pathname === "/lock") return;
     /* ── Bail out during development ── */
     // Remove or comment this block if you want protection in dev too
     // if (process.env.NODE_ENV === "development") return;
@@ -113,7 +118,7 @@ export default function DevToolsGuard() {
       document.removeEventListener("keydown", blockKeys, true);
       document.removeEventListener("contextmenu", blockContextMenu, true);
     };
-  }, []);
+  }, [pathname]);
 
   return null; // renders nothing
 }
