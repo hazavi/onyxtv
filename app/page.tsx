@@ -4,15 +4,18 @@ import {
   getTopRated,
   getNowPlaying,
   getAiringToday,
+  discoverByProvider,
+  getStreamingProviders,
 } from "@/helpers/tmdb";
 import HeroBanner from "@/components/HeroBanner";
 import MediaRow from "@/components/MediaRow";
 import ContinueWatchingRow from "@/components/ContinueWatchingRow";
+import StreamingProviders from "@/components/StreamingProviders";
 
 export const revalidate = 3600;
 
 export default async function Home() {
-  const [trending, popularMovies, popularTV, topMovies, topTV, nowPlaying, airingToday] =
+  const [trending, popularMovies, popularTV, topMovies, topTV, nowPlaying, airingToday, netflixMovies, providers] =
     await Promise.all([
       getTrending("all", "week"),
       getPopular("movie"),
@@ -21,6 +24,8 @@ export default async function Home() {
       getTopRated("tv"),
       getNowPlaying(),
       getAiringToday(),
+      discoverByProvider("movie", 8),
+      getStreamingProviders(),
     ]);
 
   const trendingFiltered = trending.results.filter(
@@ -48,6 +53,11 @@ export default async function Home() {
           title="Popular TV Shows"
           items={popularTV.results.slice(0, 20)}
         />
+          <StreamingProviders
+            initialItems={netflixMovies.results.slice(0, 20)}
+            initialProviderId={8}
+            providers={providers}
+          />
         <MediaRow
           title="Top Rated Movies"
           items={topMovies.results.slice(0, 20)}

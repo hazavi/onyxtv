@@ -69,6 +69,36 @@ export function getAiringToday() {
   return tmdbFetch<TMDBListResult>("/tv/airing_today");
 }
 
+export function discoverByProvider(
+  type: "movie" | "tv",
+  providerId: number,
+  page = 1
+) {
+  return tmdbFetch<TMDBListResult>(`/discover/${type}`, {
+    with_watch_providers: String(providerId),
+    watch_region: "US",
+    sort_by: "popularity.desc",
+    page: String(page),
+  });
+}
+
+const PROVIDER_IDS = [8, 350, 9, 15, 1899, 531, 337, 386];
+
+export async function getStreamingProviders() {
+  const data = await tmdbFetch<{
+    results: { provider_id: number; provider_name: string; logo_path: string }[];
+  }>("/watch/providers/movie", { watch_region: "US" });
+
+  return data.results
+    .filter((p) => PROVIDER_IDS.includes(p.provider_id))
+    .sort((a, b) => PROVIDER_IDS.indexOf(a.provider_id) - PROVIDER_IDS.indexOf(b.provider_id))
+    .map((p) => ({
+      id: p.provider_id,
+      name: p.provider_name,
+      logo: p.logo_path,
+    }));
+}
+
 export function searchMulti(query: string, page = 1) {
   return tmdbFetch<TMDBListResult>("/search/multi", {
     query,
